@@ -17,3 +17,6 @@
 [submodule "help"]
 	path = help
 	url = https://github.com/osmandapp/osmandapp.github.io
+[submodule "build"]
+	path = build
+	url = https://github.com/osmandapp/OsmAnd-build
