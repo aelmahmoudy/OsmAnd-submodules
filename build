@@ -1,7 +1,7 @@
 #!/bin/sh
 
 OSMAND_APPNAME="OsmAnd~"
-OSMAND_VERSION="2.0"
+OSMAND_VERSION="2.0.0"
 OSMAND_VERCODE="200"
 OSMAND_SUBDIR="android/OsmAnd"
 
@@ -33,12 +33,10 @@ sed -i "s/\"OsmAnd+\"/\"$OSMAND_APPNAME\"/g" build.xml || err "Could not replace
 # Build native code
 ./old-ndk-build.sh || err "Failed to build native code"
 
-export APK_NUMBER_VERSION="$OSMAND_VERCODE"
 export TARGET_APP_NAME="$OSMAND_APPNAME"
 export APP_NAME="$OSMAND_APPNAME"
-export APK_VERSION="$OSMAND_VERSION"
 export APP_FEATURES="$OSMAND_FEATURES"
+export APK_NUMBER_VERSION="$OSMAND_VERCODE"
 
 sed -e '/qt.*Compile/d' -i build.gradle
 sed -e '/signingConfig\s\+signingConfigs\./d' -i build.gradle
-gradle clean assembleFullLegacyFatRelease
