@@ -33,26 +33,12 @@ sed -i "s/\"OsmAnd+\"/\"$OSMAND_APPNAME\"/g" build.xml || err "Could not replace
 # Build native code
 ./old-ndk-build.sh || err "Failed to build native code"
 
-# Do not use download_resources target:
-sed  -i -e '/target name=\"-pre-build\"/s/download_resources,//' -i build.xml
+export APK_NUMBER_VERSION="$OSMAND_VERCODE"
+export TARGET_APP_NAME="$OSMAND_APPNAME"
+export APP_NAME="$OSMAND_APPNAME"
+export APK_VERSION="$OSMAND_VERSION"
+export APP_FEATURES="$OSMAND_FEATURES"
 
-# Download wrapper (TODO: build wrapper by ourselves)
-wget http://builder.osmand.net/binaries/android/OsmAndCore_wrapper.jar -O libs/OsmAndCore_wrapper.jar
-
-# Build the rest
-ant \
-	-Dsdk.dir="$ANDROID_SDK" \
-	-Dndk.dir="$ANDROID_NDK" \
-	-DBLACKBERRY_BUILD=false \
-	-DBUILD_SUFFIX= \
-	-Dbuild.version="$OSMAND_VERSION" \
-	-DAPK_VERSION="$OSMAND_VERSION" \
-	-Dbuild.version.code="$OSMAND_VERCODE" \
-	-DAPK_NUMBER_VERSION="$OSMAND_VERCODE" \
-	-DFEATURES="$OSMAND_FEATURES" \
-	-DversionFeatures="$OSMAND_FEATURES" \
-	-DCLEAN_CPP=false \
-	-DPACKAGE_TO_BUILT=net.osmand.plus \
-	-Dnet.osmand.plus= \
-	-Dnativeoff=false \
-	clean release || err "Failed to build OsmAnd (java) via ant"
+sed -e '/qt.*Compile/d' -i build.gradle
+sed -e '/signingConfig\s\+signingConfigs\./d' -i build.gradle
+gradle clean assembleFullLegacyFatRelease
