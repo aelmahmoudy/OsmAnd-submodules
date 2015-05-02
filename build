@@ -24,7 +24,7 @@ fi
 
 if [ -d $OSMAND_SUBDIR ]
 then
-	cd $OSMAND_SUBDIR || err "Could not enter android/OsmAnd subdirectory"
+	cd $OSMAND_SUBDIR || err "Could not enter $OSMAND_SUBBDIR subdirectory"
 fi
 
 # Replace the name given to the full paid app
