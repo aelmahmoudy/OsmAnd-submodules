@@ -21,9 +21,6 @@ then
 	cd $OSMAND_SUBDIR || err "Could not enter $OSMAND_SUBBDIR subdirectory"
 fi
 
-# Replace the name given to the full paid app
-sed -i "s/\"OsmAnd+\"/\"$OSMAND_APPNAME\"/g" build.xml || err "Could not replace application name"
-
 # Build native code
 ./old-ndk-build.sh || err "Failed to build native code"
 
