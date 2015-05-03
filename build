@@ -28,6 +28,7 @@ export TARGET_APP_NAME="$OSMAND_APPNAME"
 export APP_NAME="$OSMAND_APPNAME"
 export APP_FEATURES="$OSMAND_FEATURES"
 export APK_NUMBER_VERSION="$OSMAND_VERCODE"
+export APK_VERSION="$OSMAND_VERSION"
 
 sed -e '/qt.*Compile/d' -i build.gradle
 sed -e '/signingConfig\s\+signingConfigs\./d' -i build.gradle
