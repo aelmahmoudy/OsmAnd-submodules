@@ -1,8 +1,8 @@
 #!/bin/sh
 
 OSMAND_APPNAME="OsmAnd~"
-OSMAND_VERSION="2.0.1"
-OSMAND_VERCODE="201"
+OSMAND_VERSION="2.0.2"
+OSMAND_VERCODE="202"
 OSMAND_SUBDIR="android/OsmAnd"
 
 # '+' enables, '-' disables
